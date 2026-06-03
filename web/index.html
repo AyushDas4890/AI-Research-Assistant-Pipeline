@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Research Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+  <div class="aurora"></div>
+  <div class="grid-overlay"></div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">◎</div>
+        <div>
+          <div class="brand-title">Research<span>AI</span></div>
+          <div class="brand-sub">Multi-Agent Pipeline</div>
+        </div>
+      </div>
+
+      <button id="newBtn" class="new-btn">+ New research</button>
+
+      <div class="history">
+        <div class="history-head">History</div>
+        <div id="historyList" class="history-list">
+          <div class="history-empty">No sessions yet</div>
+        </div>
+      </div>
+
+      <div class="sidebar-foot">
+        <div class="dot-pulse"></div> LangGraph · OpenAI · Tavily
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="hero">
+        <h1>What do you want to <span class="grad">research</span>?</h1>
+        <p>Five autonomous agents plan, search, read, critique and write — live.</p>
+      </header>
+
+      <form id="searchForm" class="search">
+        <input id="queryInput" class="search-input" type="text" autocomplete="off"
+               placeholder="e.g. How are solid-state batteries changing the EV market?" />
+        <button id="runBtn" class="run-btn" type="submit">
+          <span class="run-label">Research</span>
+          <span class="run-arrow">→</span>
+        </button>
+      </form>
+
+      <div class="chips" id="chips">
+        <button class="chip">Impact of AI agents on software engineering</button>
+        <button class="chip">State of quantum computing in 2026</button>
+        <button class="chip">Does intermittent fasting affect metabolism?</button>
+      </div>
+
+      <!-- Memory banner -->
+      <div id="memoryBanner" class="memory-banner hidden">
+        <span class="mb-icon">🧠</span> Prior research found in memory — informing this run.
+      </div>
+
+      <!-- Pipeline -->
+      <section id="pipeline" class="pipeline hidden">
+        <div class="pipeline-track" id="pipelineTrack"></div>
+      </section>
+
+      <!-- Stats + log -->
+      <section id="workspace" class="workspace hidden">
+        <div class="stats" id="stats">
+          <div class="stat" data-k="subq"><div class="stat-val">—</div><div class="stat-lbl">Sub-questions</div></div>
+          <div class="stat" data-k="results"><div class="stat-val">—</div><div class="stat-lbl">Sources found</div></div>
+          <div class="stat" data-k="insights"><div class="stat-val">—</div><div class="stat-lbl">Insights</div></div>
+          <div class="stat" data-k="retries"><div class="stat-val">—</div><div class="stat-lbl">Critic passes</div></div>
+          <div class="stat" data-k="time"><div class="stat-val">—</div><div class="stat-lbl">Elapsed</div></div>
+        </div>
+
+        <div class="console">
+          <div class="console-head">
+            <span class="cdot r"></span><span class="cdot y"></span><span class="cdot g"></span>
+            <span class="console-title">agent stream</span>
+          </div>
+          <div id="logBox" class="console-body"></div>
+        </div>
+      </section>
+
+      <!-- Report -->
+      <section id="reportCard" class="report-card hidden">
+        <div class="report-head">
+          <div>
+            <div class="report-kicker">Research Report</div>
+            <h2 id="reportTitle">—</h2>
+          </div>
+          <div class="report-actions">
+            <button id="copyBtn" class="ghost-btn">Copy</button>
+            <button id="downloadBtn" class="solid-btn">Download .md</button>
+          </div>
+        </div>
+        <article id="reportBody" class="report-body markdown"></article>
+      </section>
+
+      <div id="emptyState" class="empty-state">
+        <div class="es-orbit"><span></span><span></span><span></span></div>
+        <p>Your report will appear here.</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

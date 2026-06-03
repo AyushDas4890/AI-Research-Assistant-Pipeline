@@ -1,0 +1,13 @@
+openai
+langgraph
+langsmith
+langchain-core
+tavily-python
+chromadb
+sentence-transformers
+fastapi
+uvicorn[standard]
+streamlit
+httpx
+beautifulsoup4
+python-dotenv

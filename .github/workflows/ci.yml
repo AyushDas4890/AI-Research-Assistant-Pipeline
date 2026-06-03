@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install lightweight deps
+        # Heavy ML deps (chromadb, sentence-transformers, torch) are skipped in CI;
+        # the codebase imports them lazily, so import/compile checks pass without them.
+        run: |
+          python -m pip install --upgrade pip
+          pip install openai langgraph langsmith langchain-core tavily-python \
+                      fastapi "uvicorn[standard]" httpx beautifulsoup4 python-dotenv
+
+      - name: Byte-compile all modules
+        run: python -m py_compile $(git ls-files '*.py')
+
+      - name: Smoke test — build the agent graph
+        run: |
+          python -c "from graph.graph_builder import build_graph; g=build_graph(); print('nodes:', sorted(g.get_graph().nodes.keys()))"
+
+      - name: Smoke test — FastAPI app + routes
+        run: |
+          python -c "import server; print('routes:', sorted({r.path for r in server.app.routes}))"
