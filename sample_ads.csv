@@ -1,0 +1,6 @@
+ad_id,platform,headline,body_copy,cta,destination_url,image_url
+ad_clean,google_display,Save on Your Next Trip,Compare flights and hotels in one place. Book in minutes.,Search Now,https://example.com,https://httpbin.org/image/png
+ad_broken_link,meta,Limited Time Offer,Get 20% off your first order today.,Shop Now,https://this-domain-should-not-exist-adqa-test.example,https://httpbin.org/image/png
+ad_risky_copy,google_display,Guaranteed Weight Loss Miracle Cure,Clinically proven results in just 7 days. 100% free trial. Act now!,Get Started,https://example.com,https://httpbin.org/image/png
+ad_long_copy,linkedin,This Headline Is Deliberately Way Too Long For The Platform Limit,This body copy is also written to run on for much longer than any reasonable platform character limit would allow so it should trip the length check.,Learn More,https://example.com,https://httpbin.org/image/png
+ad_bad_image,google_display,New Season Arrivals,Shop the latest styles now.,Shop Now,https://example.com,https://this-domain-should-not-exist-adqa-test.example/image.jpg

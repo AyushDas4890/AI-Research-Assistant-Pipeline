@@ -43,6 +43,7 @@
 - [🚀 Running It](#-running-it)
 - [💾 How Memory Works](#-how-memory-works)
 - [🛡 Error Handling](#-error-handling)
+- [🧪 Ad QA Automation](#-ad-qa-automation)
 - [🔭 Observability](#-observability)
 - [📸 Screenshots](#-screenshots)
 - [🧰 Tech Stack](#-tech-stack)
@@ -61,6 +62,7 @@
 - ⚡ **Live streaming web UI** — watch each agent execute in real time over **Server-Sent Events**.
 - 🔭 **LangSmith tracing** — every step, tool call, and routing decision is inspectable.
 - 🛡 **Graceful degradation** — bad URLs, API failures, and missing memory never crash the run.
+- 🧪 **Ad QA automation** — a separate batch pipeline (`ad_qa/`) that screens ad creatives for broken links, image spec violations, and copy/policy risk before launch. See [Ad QA Automation](#-ad-qa-automation).
 
 ---
 
@@ -140,6 +142,14 @@ AI-Research-Assistant-Pipeline/
 │   └── edges.py             # Conditional routing
 ├── agents/                  # planner · searcher · reader · critic · writer
 ├── tools/                   # search_tool · fetch_tool · memory_tool · schemas
+├── ad_qa/                   # Ad QA automation pipeline (separate LangGraph, see below)
+│   ├── agents/               # ingestor · link_checker · image_qa · copy_compliance · policy_compliance · reporter
+│   ├── tools/                # link_tool · image_tool · schemas
+│   ├── config.py             # platform specs, copy limits, banned-term list
+│   ├── state.py / graph_builder.py
+│   └── README.md
+├── ad_qa_main.py            # CLI runner for the Ad QA pipeline
+├── sample_ads.csv           # Example input for the Ad QA pipeline
 ├── memory/                  # short_term (state helpers) · long_term (ChromaDB)
 ├── utils/                   # logger · helpers (LLM client + JSON-with-retry)
 ├── .github/                 # CI workflow + issue/PR templates
@@ -249,6 +259,37 @@ streamlit run app.py
 | `fetch_url` fails | Returns `""`; Reader skips that source |
 | ChromaDB unavailable | Logged warning; pipeline runs without memory |
 | Anything in `graph.invoke()` | Wrapped in try/except in `main.py` |
+
+---
+
+## 🧪 Ad QA Automation
+
+A second, independent LangGraph pipeline in `ad_qa/` for QA'ing ad creatives before they launch — same architecture as the research pipeline (typed state, one agent per concern), but linear instead of retry-looped, and run as a batch CLI instead of the web app.
+
+```
+ingestor → link_checker → image_qa → copy_compliance → policy_compliance → reporter → END
+```
+
+| Agent | Checks | Uses LLM? |
+|---|---|---|
+| `link_checker` | Destination URL loads, redirect count, latency | No |
+| `image_qa` | Format, file size, dimensions vs. platform spec | No |
+| `copy_compliance` | Banned/risky terms + character limits (deterministic), then unsubstantiated claims / missing disclaimers (LLM) | Deterministic pass: no · LLM pass: yes |
+| `policy_compliance` | Google/Meta/LinkedIn-style ad policy risk review | Yes |
+| `reporter` | Aggregates into a `PASS` / `WARN` / `FAIL` Markdown + CSV report, worst-first | No |
+
+**Run it:**
+
+```bash
+python ad_qa_main.py sample_ads.csv
+# writes output/ad_qa_report.md and output/ad_qa_report.csv
+```
+
+Input is a CSV of ad records (`ad_id`, `platform`, `headline`, `body_copy`, `cta`, `destination_url`, `image_url`). Uses the same `OPENAI_API_KEY` from `.env` for the copy and policy checks — the link and image checks work without it.
+
+> ⚠️ `ad_qa/config.py`'s platform specs, character limits, and banned-term list are a starting point, not verified against current platform policy pages — customize and cross-check before trusting this for real ad submissions.
+
+Full details, input format, and how to add a new check: **[ad_qa/README.md](ad_qa/README.md)**.
 
 ---
 
