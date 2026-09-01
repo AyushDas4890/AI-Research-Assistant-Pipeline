@@ -307,15 +307,9 @@ With `LANGCHAIN_TRACING_V2=true`, every run is traced in LangSmith automatically
 
 ---
 
-## 📸 Screenshots
+![AI Research Assistant Web UI](docs/pipeline.png)
 
-> _Add screenshots/GIFs of the web UI here once you run it locally._
-> Save images to `docs/` and reference them, e.g.:
->
-> ```markdown
-> ![Pipeline running](docs/pipeline.png)
-> ![Final report](docs/report.png)
-> ```
+![Final Research Report View](docs/report.png)
 
 ---
 
