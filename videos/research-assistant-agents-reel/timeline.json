@@ -1,0 +1,62 @@
+{
+  "note": "Single source of truth for picture + sound. Everything is in BEATS on the measured grid (beats.json). film.js reads marks via data.js; sync.mjs turns sfx events into cues.json; music.py reads music.sections.",
+  "title": "AI Research Assistant — portfolio reel",
+  "duration": 20,
+  "fps": 60,
+  "bpm": 120,
+  "formats": ["16x9"],
+  "music": {
+    "source": "synth",
+    "chords": ["Am", "F", "C", "G"],
+    "sections": [
+      { "at": "hook",   "kind": "intro" },
+      { "at": "plan",   "kind": "full" },
+      { "at": "graph",  "kind": "build" },
+      { "at": "gap",    "kind": "gap" },
+      { "at": "end",    "kind": "drop" }
+    ],
+    "accents": ["end"]
+  },
+  "voiceover": null,
+  "marks": {
+    "hook": 0, "hook_w2": 1, "field": 1.5, "type0": 2, "type1": 3.5,
+    "agents": 4, "run": 5, "running": 6,
+    "plan": 8, "search": 10, "read": 12, "critic": 14,
+    "gaps": 16, "retry": 18,
+    "report": 20, "report_title": 22,
+    "time": 24, "time_sub": 26,
+    "memory": 28, "recall": 30,
+    "graph": 32, "gap": 35.5,
+    "end": 36, "cta": 37, "url": 37.5,
+    "done": 40
+  },
+  "sfx": [
+    { "at": "hook_w2", "type": "pop",    "gain": 0.6,  "what": "\"a topic.\" lands" },
+    { "at": "field",   "type": "pop",    "gain": 0.45, "what": "real input field lands" },
+    { "at": "type0", "to": 3.75, "every": 0.25, "type": "tick", "gain": 0.3, "what": "typing the topic" },
+    { "at": "agents",  "type": "pop",    "gain": 0.6,  "what": "\"Five agents take it from here.\"" },
+    { "at": "run",     "type": "click",  "gain": 0.8,  "what": "cursor presses Run Research" },
+    { "at": "running", "type": "pop",    "gain": 0.45, "what": "status: Running agent pipeline" },
+    { "at": "plan",    "type": "pop",    "gain": 0.75, "what": "Plan. + planner log line" },
+    { "at": "search",  "type": "pop",    "gain": 0.6,  "what": "Search. + searcher log line" },
+    { "at": "read",    "type": "pop",    "gain": 0.6,  "what": "Read. + reader log line" },
+    { "at": "critic",  "type": "pop",    "gain": 0.7,  "what": "Critique. + critic log line" },
+    { "at": "gaps",    "type": "click",  "gain": 0.65, "what": "highlight snaps onto gaps_found: True" },
+    { "at": "retry",   "type": "whoosh", "gain": 0.5,  "what": "loop back to Searcher (peaks on landing)" },
+    { "at": "retry",   "type": "pop",    "gain": 0.55, "what": "retry log line lands" },
+    { "at": "report",  "type": "whoosh", "gain": 0.6,  "what": "cut + scroll to the report" },
+    { "at": "report_title", "type": "pop", "gain": 0.5, "what": "report title highlight" },
+    { "at": "time",    "type": "pop",    "gain": 0.65, "what": "run-time counter appears" },
+    { "at": 24.25, "to": 25.5, "every": 0.25, "type": "tick", "gain": 0.25, "what": "counter rolling" },
+    { "at": "time_sub","type": "pop",    "gain": 0.55, "what": "\"from topic to sourced report\"" },
+    { "at": "memory",  "type": "pop",    "gain": 0.65, "what": "saved session appears in Past Sessions" },
+    { "at": "recall",  "type": "click",  "gain": 0.75, "what": "cursor opens the saved session" },
+    { "at": "graph",   "type": "pop",    "gain": 0.6,  "what": "agent graph + headline" },
+    { "at": 32.5, "to": 35, "every": 0.5, "type": "tick", "gain": 0.4, "what": "indicator steps through the graph" },
+    { "at": "end",     "type": "riser",  "gain": 0.55, "what": "riser through the gap, peaks on the lockup" },
+    { "at": "end",     "type": "thump",  "gain": 0.9,  "what": "lockup lands" },
+    { "at": "cta",     "type": "pop",    "gain": 0.6,  "what": "Try the live demo" },
+    { "at": "url",     "type": "pop",    "gain": 0.4,  "what": "URL line" }
+  ],
+  "mix": { "music": 0, "sfx": -3, "vo": 0, "duck": true }
+}

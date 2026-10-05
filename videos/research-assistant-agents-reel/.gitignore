@@ -1,0 +1,13 @@
+# symlink to the global Playwright install
+node_modules
+# regenerable: scripts/music.py, sfx.mjs, mix.py
+audio/*.wav
+audio/vo/
+# review kits, contact sheets, drafts and test clips
+review/
+renders/draft_*
+renders/clip_*
+renders/*.png
+renders/*.jpg
+# capture replay state
+capture_app/.saved_session
