@@ -118,3 +118,11 @@ Critic run inline (no subagent in this session), evidence first.
 **Verdict:** SHIP
 
 ---
+
+## Final: renders/16x9.mp4 (60 fps, adaptive 180° motion blur)
+
+1920x1080 H.264 yuv420p 60 fps, AAC 320k, 20.0 s, 7.8 MB. Mix -14.2 LUFS integrated, true peak -1.3 dBTP (mix.py: no limiter warning). near_blank_frames: none; max gap 2.0 s; longest static 1.0 s.
+
+Sync at 60 fps reads 11/21 within 45 ms, with most outliers at -100 ms. The finer frame rate now resolves the outgoing headline's lift-out, which starts 0.15 s before each swap (sequential-swap rule), and the metric takes that as the onset. Stills at 4.90 / 4.95 / 5.00 / 5.05 s confirm the incoming word is half-risen on the pop and landed one frame later, and the log line swaps on the beat. Audio left on the grid.
+
+`render.mjs --verify`: 12/12 probes identical. Contact sheet: `docs/contact_final.jpg`.
