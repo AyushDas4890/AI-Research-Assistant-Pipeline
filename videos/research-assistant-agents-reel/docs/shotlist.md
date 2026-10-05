@@ -1,6 +1,6 @@
 # Shotlist: AI Research Assistant reel · 20 s · 120 BPM · 40 beats · 16x9
 
-STATUS: DRAFT — waiting for the user's OK. Nothing gets built until this says APPROVED.
+STATUS: APPROVED by the user (2026-10-05). Rows 7–8 updated during build to match the timeline (memory before/after beat, full graph walk).
 
 Beats are on the measured grid (`beats.json`, 119.99 BPM, 0 ms residual). Every row lists what is NEW on screen. All UI is real (captured from `app.py`).
 
@@ -12,8 +12,8 @@ Beats are on the measured grid (`beats.json`, 119.99 BPM, 0 ms residual). Every 
 | 4 | 16–20 | 8.0–10.0 | **Self-critique.** Camera punches in on the Critic line; accent underline snaps under `gaps_found: True`; then the retry line `[SEARCHER] … retry: 1` lands | "Finds its own **gaps.**" → "Searches again." | punch-in b16 (default); underline b16 (snappy); headline swap + new line b18 | click b16, whoosh + pop b18 |
 | 5 | 20–24 | 10.0–12.0 | **Report.** Hard cut to the real finished page: "✅ Research complete", then it scrolls to the report title and Executive Summary | "Writes a sourced report." | scroll b20–22 (seg + ease), accent highlight on the H1 b22; push | whoosh b20, pop b22 |
 | 6 | 24–28 | 12.0–14.0 | **Proof.** Big counter rolls up to the real run time; the real "⏱️ Total run time: 74.1s" crop sits under it | "**74 s**" · "from topic to sourced report" | counter 0→74 over b24–25.5; sub line rises b26 | pop b24, ticks b24.25–25.25, pop b26 |
-| 7 | 28–32 | 14.0–16.0 | **Memory.** Hard cut to the real sidebar after a reload: the run now sits in "Past Sessions"; cursor clicks it and the report comes back | "Saved to **memory.**" → "The next run starts smarter." | session pill rises b28 (snappy); cursor click b30, page swaps to loaded state; headline swap b30 | pop b28, click b30 |
-| 8 | 32–36 | 16.0–18.0 | **Architecture.** The real "Agent Graph" sidebar card; an accent bar walks Planner → Searcher → Reader → Critic → back to Searcher → … → Writer | "One LangGraph graph. Five agents." | indicator steps every half beat b32.5–35 (stretch on move); push | pop b32, ticks b32.5–34.5, music builds then stops at b35.5 |
+| 7 | 28–32 | 14.0–16.0 | **Memory.** Hard cut to the real sidebar after a reload: the run now sits in "Past Sessions"; cursor clicks it and the report comes back | "Saved to **memory.**" → "The next run starts smarter." | tight on the sidebar: "No past research yet" b28 → saved session appears b29; cursor click b30, the card widens and pulls back to the restored report; headline swap b30 | pop b29, click b30 |
+| 8 | 32–36 | 16.0–18.0 | **Architecture.** The real "Agent Graph" sidebar card; an accent bar walks Planner → Searcher → Reader → Critic → back to Searcher → … → Writer | "One LangGraph graph. Five agents." | indicator box walks Planner b32 → Searcher → Reader → Critic → Searcher → Reader → Critic → Writer b35.5, one step per half beat (stretches on the move); push | pop b32, ticks b32.5–35, pop on Writer b35.5 (stop-time hit) |
 | 9 | 36–40 | 18.0–20.0 | **End card.** The app's real H1 lockup "🔬 AI Research Assistant" + its caption; CTA + URL underneath. Never static: slow push + underline sweep through the CTA | "Try the **live demo**" · "ayushdas4890-ai-research-assistant-pipeline-app-1sjuvf.streamlit.app" | lockup rises b36 (heavy), CTA b37, URL b37.5 (snappy); push 1.00→1.06; sweep b38.5 | riser → thump b36, pop b37, pop b37.5 |
 
 Rule check: something new at least every 2 s (every bar has 2+ events) · hook reads on frame 0 ("Give it") and fully by 0.6 s · end card holds 2 s with continuous push + sweep · hard cuts only on bar lines.
